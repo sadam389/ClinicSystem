@@ -1,0 +1,60 @@
+-- =====================================================================
+-- PRODUCTION BACKUP DUMP: Clinic Appointment and Patient Records System
+-- Dump Generation: mysqldump --single-transaction --quick clinic_db
+-- Generated: 2026-11-08 23:59:59
+-- Host: localhost    Database: clinic_db
+-- =====================================================================
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `clinic_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
+USE `clinic_db`;
+
+--
+-- Table structure for table `users`
+--
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `user_id` int NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) NOT NULL,
+  `password_hash` varchar(255) NOT NULL,
+  `salt` varchar(64) NOT NULL,
+  `role` enum('PATIENT','DOCTOR','ADMIN') NOT NULL,
+  `status` enum('ACTIVE','SUSPENDED','PENDING') DEFAULT 'ACTIVE',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `email` (`email`),
+  KEY `idx_user_email` (`email`),
+  KEY `idx_user_role` (`role`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+LOCK TABLES `users` WRITE;
+INSERT INTO `users` VALUES
+(1,'admin@medicare.org','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918','SALT_ADM_001','ADMIN','ACTIVE','2026-11-01 08:00:00','2026-11-01 08:00:00'),
+(2,'dr.smith@medicare.org','7d94f29108c903bc047c32b55b93d6118d0421e491c1d856019323fb3aa28014','SALT_DOC_001','DOCTOR','ACTIVE','2026-11-01 08:00:00','2026-11-01 08:00:00'),
+(3,'dr.chen@medicare.org','7d94f29108c903bc047c32b55b93d6118d0421e491c1d856019323fb3aa28014','SALT_DOC_002','DOCTOR','ACTIVE','2026-11-01 08:00:00','2026-11-01 08:00:00'),
+(4,'dr.patel@medicare.org','7d94f29108c903bc047c32b55b93d6118d0421e491c1d856019323fb3aa28014','SALT_DOC_003','DOCTOR','ACTIVE','2026-11-01 08:00:00','2026-11-01 08:00:00'),
+(5,'john.doe@gmail.com','9f83793b4a09b53777714ddbda3fc83478fe6bc9d38d0f33eb41f8ccc4ff0643','SALT_PAT_001','PATIENT','ACTIVE','2026-11-01 09:00:00','2026-11-01 09:00:00'),
+(6,'sarah.jenkins@outlook.com','9f83793b4a09b53777714ddbda3fc83478fe6bc9d38d0f33eb41f8ccc4ff0643','SALT_PAT_002','PATIENT','ACTIVE','2026-11-01 09:15:00','2026-11-01 09:15:00'),
+(7,'robert.taylor@yahoo.com','9f83793b4a09b53777714ddbda3fc83478fe6bc9d38d0f33eb41f8ccc4ff0643','SALT_PAT_003','PATIENT','ACTIVE','2026-11-01 09:30:00','2026-11-01 09:30:00');
+UNLOCK TABLES;
+
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+-- Dump completed on 2026-11-08 23:59:59

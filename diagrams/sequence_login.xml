@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-11-08T22:00:00.000Z" agent="SCD Clinic System Generator" version="22.0.0" type="device">
+  <diagram id="seq_login" name="Sequence Diagram - User Authentication">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="700" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Lifelines -->
+        <mxCell id="ll_actor" value="User Browser&#xa;(Client)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#e0f2fe;strokeColor=#0284c7;" vertex="1" parent="1">
+          <mxGeometry x="60" y="40" width="120" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_servlet" value="LoginServlet&#xa;(Controller)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#f1f5f9;strokeColor=#475569;" vertex="1" parent="1">
+          <mxGeometry x="260" y="40" width="130" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_service" value="AuthService&#xa;(Business Logic)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#f1f5f9;strokeColor=#475569;" vertex="1" parent="1">
+          <mxGeometry x="460" y="40" width="140" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_dao" value="UserDaoImpl&#xa;(Data Access)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#f1f5f9;strokeColor=#475569;" vertex="1" parent="1">
+          <mxGeometry x="670" y="40" width="130" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_db" value="MySQL DB&#xa;(Persistence)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#dcfce7;strokeColor=#16a34a;" vertex="1" parent="1">
+          <mxGeometry x="860" y="40" width="110" height="520" as="geometry" />
+        </mxCell>
+
+        <!-- Messages -->
+        <mxCell id="msg1" value="1: POST /login (email, password)" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1" source="ll_actor" target="ll_servlet">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><mx:Point x="120" y="110" as="sourcePoint" /><mx:Point x="320" y="110" as="targetPoint" /></mx:Geometry>
+        </mxCell>
+        <mxCell id="msg2" value="2: authenticate(email, pass)" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1" source="ll_servlet" target="ll_service">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><mx:Point x="325" y="140" as="sourcePoint" /><mx:Point x="525" y="140" as="targetPoint" /></mx:Geometry>
+        </mxCell>
+        <mxCell id="msg3" value="3: findByEmail(email)" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1" source="ll_service" target="ll_dao">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><mx:Point x="530" y="170" as="sourcePoint" /><mx:Point x="730" y="170" as="targetPoint" /></mx:Geometry>
+        </mxCell>
+        <mxCell id="msg4" value="4: SELECT * FROM users WHERE email=?" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1" source="ll_dao" target="ll_db">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><mx:Point x="735" y="200" as="sourcePoint" /><mx:Point x="910" y="200" as="targetPoint" /></mx:Geometry>
+        </mxCell>
+        <mxCell id="msg5" value="5: ResultSet (hash, salt, role)" style="html=1;verticalAlign=bottom;endArrow=dashed;rounded=0;" edge="1" parent="1" source="ll_db" target="ll_dao">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><mx:Point x="910" y="240" as="sourcePoint" /><mx:Point x="735" y="240" as="targetPoint" /></mx:Geometry>
+        </mxCell>
+        <mxCell id="msg6" value="6: Return User object" style="html=1;verticalAlign=bottom;endArrow=dashed;rounded=0;" edge="1" parent="1" source="ll_dao" target="ll_service">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><mx:Point x="730" y="270" as="sourcePoint" /><mx:Point x="530" y="270" as="targetPoint" /></mx:Geometry>
+        </mxCell>
+        <mxCell id="msg7" value="7: PasswordUtil.verify(pass, hash, salt)" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1" source="ll_service" target="ll_service">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><Array as="points"><mx:Point x="560" y="300" /><mx:Point x="580" y="320" /><mx:Point x="535" y="330" /></Array></mx:Geometry>
+        </mxCell>
+        <mxCell id="msg8" value="8: Verified (User session entity)" style="html=1;verticalAlign=bottom;endArrow=dashed;rounded=0;" edge="1" parent="1" source="ll_service" target="ll_servlet">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><mx:Point x="525" y="360" as="sourcePoint" /><mx:Point x="325" y="360" as="targetPoint" /></mx:Geometry>
+        </mxCell>
+        <mxCell id="msg9" value="9: Set HttpSession (role, user)" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1" source="ll_servlet" target="ll_servlet">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><Array as="points"><mx:Point x="350" y="390" /><mx:Point x="370" y="410" /><mx:Point x="325" y="420" /></Array></mx:Geometry>
+        </mxCell>
+        <mxCell id="msg10" value="10: Redirect 302 to /{role}/dashboard" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1" source="ll_servlet" target="ll_actor">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><mx:Point x="320" y="450" as="sourcePoint" /><mx:Point x="120" y="450" as="targetPoint" /></mx:Geometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

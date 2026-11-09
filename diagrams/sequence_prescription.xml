@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-11-08T22:00:00.000Z" agent="SCD Clinic System Generator" version="22.0.0" type="device">
+  <diagram id="seq_prescription" name="Sequence Diagram - Prescription & Medical Record Flow">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="700" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="ll_doc" value="Doctor Client" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#dcfce7;strokeColor=#16a34a;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="110" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_psrv" value="PrescriptionServlet" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#f1f5f9;strokeColor=#475569;" vertex="1" parent="1">
+          <mxGeometry x="220" y="40" width="130" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_pservice" value="PrescriptionService" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#f1f5f9;strokeColor=#475569;" vertex="1" parent="1">
+          <mxGeometry x="420" y="40" width="130" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_mrdao" value="MedicalRecordDao" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#f1f5f9;strokeColor=#475569;" vertex="1" parent="1">
+          <mxGeometry x="610" y="40" width="130" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_rxdao" value="PrescriptionDao" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#f1f5f9;strokeColor=#475569;" vertex="1" parent="1">
+          <mxGeometry x="800" y="40" width="120" height="520" as="geometry" />
+        </mxCell>
+
+        <!-- Messages -->
+        <mxCell id="m1" value="1: POST /doctor/prescriptions (diagnosis, items[])" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1" source="ll_doc" target="ll_psrv">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><mx:Point x="95" y="110" as="sourcePoint" /><mx:Point x="285" y="110" as="targetPoint" /></mx:Geometry>
+        </mxCell>
+        <mxCell id="m2" value="2: createPrescriptionWithRecord(aptId, docId, patId, diag, items)" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1" source="ll_psrv" target="ll_pservice">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><mx:Point x="285" y="140" as="sourcePoint" /><mx:Point x="485" y="140" as="targetPoint" /></mx:Geometry>
+        </mxCell>
+        <mxCell id="m3" value="3: create(MedicalRecord record)" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1" source="ll_pservice" target="ll_mrdao">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><mx:Point x="485" y="180" as="sourcePoint" /><mx:Point x="675" y="180" as="targetPoint" /></mx:Geometry>
+        </mxCell>
+        <mxCell id="m4" value="4: return recordId" style="html=1;verticalAlign=bottom;endArrow=dashed;rounded=0;" edge="1" parent="1" source="ll_mrdao" target="ll_pservice">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><mx:Point x="675" y="210" as="sourcePoint" /><mx:Point x="485" y="210" as="targetPoint" /></mx:Geometry>
+        </mxCell>
+        <mxCell id="m5" value="5: create(Prescription with items) [Atomic Transaction]" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1" source="ll_pservice" target="ll_rxdao">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><mx:Point x="485" y="250" as="sourcePoint" /><mx:Point x="860" y="250" as="targetPoint" /></mx:Geometry>
+        </mxCell>
+        <mxCell id="m6" value="6: Commit transaction &amp; return rxId" style="html=1;verticalAlign=bottom;endArrow=dashed;rounded=0;" edge="1" parent="1" source="ll_rxdao" target="ll_pservice">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><mx:Point x="860" y="300" as="sourcePoint" /><mx:Point x="485" y="300" as="targetPoint" /></mx:Geometry>
+        </mxCell>
+        <mxCell id="m7" value="7: Update Appointment Status to COMPLETED" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1" source="ll_pservice" target="ll_pservice">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><Array as="points"><mx:Point x="510" y="330" /><mx:Point x="530" y="350" /><mx:Point x="490" y="360" /></Array></mx:Geometry>
+        </mxCell>
+        <mxCell id="m8" value="8: Return success" style="html=1;verticalAlign=bottom;endArrow=dashed;rounded=0;" edge="1" parent="1" source="ll_pservice" target="ll_psrv">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><mx:Point x="485" y="400" as="sourcePoint" /><mx:Point x="285" y="400" as="targetPoint" /></mx:Geometry>
+        </mxCell>
+        <mxCell id="m9" value="9: Redirect /doctor/prescriptions?msg=Finalized" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1" source="ll_psrv" target="ll_doc">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><mx:Point x="285" y="440" as="sourcePoint" /><mx:Point x="95" y="440" as="targetPoint" /></mx:Geometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

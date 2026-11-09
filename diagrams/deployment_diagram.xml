@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-11-08T22:00:00.000Z" agent="SCD Clinic System Generator" version="22.0.0" type="device">
+  <diagram id="deployment_diagram" name="UML Deployment Diagram - Three Tier Architecture">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="800" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Node: Client Device -->
+        <mxCell id="node_client" value="&lt;&lt;device&gt;&gt;&#xa;&lt;b&gt;User Workstation / Mobile&lt;/b&gt;&#xa;OS: Windows / macOS / Linux / Android" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;size=20;fillColor=#e0f2fe;strokeColor=#0284c7;align=center;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="60" y="160" width="220" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_browser" value="&lt;&lt;execution environment&gt;&gt;&#xa;&lt;b&gt;Web Browser&lt;/b&gt;&#xa;Chrome / Firefox / Safari / Edge&#xa;HTML5, CSS3, ES6 JS" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#0284c7;" vertex="1" parent="node_client">
+          <mxGeometry x="20" y="80" width="180" height="150" as="geometry" />
+        </mxCell>
+
+        <!-- Node: Application Server -->
+        <mxCell id="node_server" value="&lt;&lt;device&gt;&gt;&#xa;&lt;b&gt;Application Host Server&lt;/b&gt;&#xa;Linux / Windows Server (JDK 17+)" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;size=20;fillColor=#f1f5f9;strokeColor=#475569;align=center;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="420" y="100" width="300" height="380" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_tomcat" value="&lt;&lt;execution environment&gt;&gt;&#xa;&lt;b&gt;Apache Tomcat 9.0 / 10.1&lt;/b&gt;&#xa;Servlet Container (Port: 8080)" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#475569;" vertex="1" parent="node_server">
+          <mxGeometry x="25" y="80" width="250" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="art_war" value="&lt;&lt;artifact&gt;&gt;&#xa;&lt;b&gt;ClinicSystem.war&lt;/b&gt;&#xa;• Servlets (MVC Controllers)&#xa;• JSP Views &amp; CSS/JS Assets&#xa;• Service &amp; DAO Layer&#xa;• HikariCP / DB Pool&#xa;• Legacy Patient Importer" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingLeft=10;fillColor=#e0f2fe;strokeColor=#0284c7;" vertex="1" parent="comp_tomcat">
+          <mxGeometry x="20" y="80" width="210" height="170" as="geometry" />
+        </mxCell>
+
+        <!-- Node: Database Server -->
+        <mxCell id="node_db" value="&lt;&lt;device&gt;&gt;&#xa;&lt;b&gt;Database Server&lt;/b&gt;&#xa;Dedicated MySQL Instance (Port: 3306)" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;size=20;fillColor=#dcfce7;strokeColor=#16a34a;align=center;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="840" y="160" width="220" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_mysql" value="&lt;&lt;database system&gt;&gt;&#xa;&lt;b&gt;MySQL 8.0+ Engine&lt;/b&gt;&#xa;InnoDB Engine, UTF-8&#xa;• clinic_db&#xa;• Automated cron backups" style="shape=cylinder;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#ffffff;strokeColor=#16a34a;verticalAlign=top;spacingTop=15;" vertex="1" parent="node_db">
+          <mxGeometry x="25" y="80" width="170" height="150" as="geometry" />
+        </mxCell>
+
+        <!-- Network Protocols -->
+        <mxCell id="conn_http" value="HTTP / HTTPS (Port 8080/443)&#xa;TCP/IP REST &amp; JSP HTML" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;strokeWidth=2;" edge="1" parent="1" source="node_client" target="node_server">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="conn_jdbc" value="JDBC Protocol (Port 3306)&#xa;mysql-connector-j-8.x.jar" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;strokeWidth=2;" edge="1" parent="1" source="node_server" target="node_db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

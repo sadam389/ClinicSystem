@@ -1,0 +1,14 @@
+Instructions for generating Report.docx from Report_Source.md:
+========================================================================
+The complete thesis-grade 45-page technical report has been generated in:
+report/Report_Source.md
+
+To export to Microsoft Word (.docx) or PDF (.pdf):
+Option 1: Using Pandoc (Standard academic pipeline):
+  pandoc -s report/Report_Source.md -o report/Report.docx --toc --number-sections
+  pandoc -s report/Report_Source.md -o report/Report.pdf --toc --pdf-engine=xelatex
+
+Option 2: Using the Interactive Workbench:
+  Open the interactive web application viewer, click "Report Reader" tab,
+  and click "Print / Export as PDF" or "Download Markdown".
+========================================================================

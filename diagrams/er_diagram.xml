@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-11-08T22:00:00.000Z" agent="SCD Clinic System Generator" version="22.0.0" type="device">
+  <diagram id="er_diagram" name="Entity Relationship Diagram (ERD)">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Table: USERS -->
+        <mxCell id="tbl_users" value="&lt;b&gt;USERS&lt;/b&gt;&#xa;--&#xa;PK user_id INT (AI)&#xa;email VARCHAR(100) UQ&#xa;password_hash VARCHAR(255)&#xa;salt VARCHAR(64)&#xa;role ENUM&#xa;status ENUM&#xa;created_at TIMESTAMP" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;html=1;fillColor=#f1f5f9;strokeColor=#475569;" vertex="1" parent="1">
+          <mxGeometry x="480" y="30" width="220" height="150" as="geometry" />
+        </mxCell>
+
+        <!-- Table: PATIENTS -->
+        <mxCell id="tbl_patients" value="&lt;b&gt;PATIENTS&lt;/b&gt;&#xa;--&#xa;PK patient_id INT (AI)&#xa;FK user_id INT (UQ)&#xa;patient_mrn VARCHAR(30) UQ&#xa;first_name VARCHAR(60)&#xa;last_name VARCHAR(60)&#xa;date_of_birth DATE&#xa;gender ENUM&#xa;phone VARCHAR(20)&#xa;address VARCHAR(255)&#xa;blood_group ENUM&#xa;allergies TEXT" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;" vertex="1" parent="1">
+          <mxGeometry x="100" y="240" width="220" height="230" as="geometry" />
+        </mxCell>
+
+        <!-- Table: DOCTORS -->
+        <mxCell id="tbl_doctors" value="&lt;b&gt;DOCTORS&lt;/b&gt;&#xa;--&#xa;PK doctor_id INT (AI)&#xa;FK user_id INT (UQ)&#xa;FK department_id INT&#xa;license_number VARCHAR(50) UQ&#xa;first_name VARCHAR(60)&#xa;last_name VARCHAR(60)&#xa;phone VARCHAR(20)&#xa;qualification VARCHAR(100)&#xa;room_number VARCHAR(20)&#xa;max_daily_patients INT&#xa;is_available BOOLEAN" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;html=1;fillColor=#dcfce7;strokeColor=#16a34a;" vertex="1" parent="1">
+          <mxGeometry x="840" y="240" width="230" height="230" as="geometry" />
+        </mxCell>
+
+        <!-- Table: DEPARTMENTS -->
+        <mxCell id="tbl_departments" value="&lt;b&gt;DEPARTMENTS&lt;/b&gt;&#xa;--&#xa;PK department_id INT (AI)&#xa;name VARCHAR(100) UQ&#xa;code VARCHAR(20) UQ&#xa;consultation_fee DECIMAL(10,2)" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;html=1;fillColor=#f8fafc;strokeColor=#64748b;" vertex="1" parent="1">
+          <mxGeometry x="850" y="520" width="210" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- Table: APPOINTMENTS -->
+        <mxCell id="tbl_appointments" value="&lt;b&gt;APPOINTMENTS&lt;/b&gt;&#xa;--&#xa;PK appointment_id INT (AI)&#xa;appointment_number VARCHAR(32) UQ&#xa;FK patient_id INT&#xa;FK doctor_id INT&#xa;appointment_date DATE&#xa;start_time TIME&#xa;end_time TIME&#xa;status ENUM&#xa;reason_for_visit VARCHAR(255)" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;html=1;fillColor=#ffffff;strokeColor=#0284c7;" vertex="1" parent="1">
+          <mxGeometry x="470" y="270" width="240" height="200" as="geometry" />
+        </mxCell>
+
+        <!-- Table: MEDICAL_RECORDS -->
+        <mxCell id="tbl_records" value="&lt;b&gt;MEDICAL_RECORDS&lt;/b&gt;&#xa;--&#xa;PK record_id INT (AI)&#xa;FK patient_id INT&#xa;FK doctor_id INT&#xa;FK appointment_id INT (UQ)&#xa;diagnosis VARCHAR(255)&#xa;symptoms TEXT&#xa;blood_pressure VARCHAR(20)&#xa;pulse_bpm INT&#xa;clinical_notes TEXT" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;html=1;fillColor=#ffffff;strokeColor=#0284c7;" vertex="1" parent="1">
+          <mxGeometry x="240" y="540" width="230" height="200" as="geometry" />
+        </mxCell>
+
+        <!-- Table: PRESCRIPTIONS -->
+        <mxCell id="tbl_prescriptions" value="&lt;b&gt;PRESCRIPTIONS&lt;/b&gt;&#xa;--&#xa;PK prescription_id INT (AI)&#xa;FK record_id INT (UQ)&#xa;FK doctor_id INT&#xa;FK patient_id INT&#xa;advice TEXT&#xa;follow_up_date DATE" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;html=1;fillColor=#f0f9ff;strokeColor=#0284c7;" vertex="1" parent="1">
+          <mxGeometry x="540" y="540" width="220" height="150" as="geometry" />
+        </mxCell>
+
+        <!-- Table: PRESCRIPTION_ITEMS -->
+        <mxCell id="tbl_items" value="&lt;b&gt;PRESCRIPTION_ITEMS&lt;/b&gt;&#xa;--&#xa;PK item_id INT (AI)&#xa;FK prescription_id INT&#xa;medicine_name VARCHAR(120)&#xa;dosage VARCHAR(50)&#xa;frequency VARCHAR(50)&#xa;duration_days INT&#xa;instructions VARCHAR(255)" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;html=1;fillColor=#ffffff;strokeColor=#64748b;" vertex="1" parent="1">
+          <mxGeometry x="545" y="730" width="210" height="160" as="geometry" />
+        </mxCell>
+
+        <!-- Foreign Key Connectors -->
+        <mxCell id="fk1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=ERoneToMany;startArrow=ERmandOne;" edge="1" parent="1" source="tbl_users" target="tbl_patients">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fk2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=ERoneToMany;startArrow=ERmandOne;" edge="1" parent="1" source="tbl_users" target="tbl_doctors">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fk3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=ERoneToMany;startArrow=ERmandOne;" edge="1" parent="1" source="tbl_patients" target="tbl_appointments">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fk4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=ERoneToMany;startArrow=ERmandOne;" edge="1" parent="1" source="tbl_doctors" target="tbl_appointments">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fk5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=ERoneToMany;startArrow=ERmandOne;" edge="1" parent="1" source="tbl_departments" target="tbl_doctors">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fk6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=ERoneToMany;startArrow=ERmandOne;" edge="1" parent="1" source="tbl_records" target="tbl_prescriptions">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fk7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=ERoneToMany;startArrow=ERmandOne;" edge="1" parent="1" source="tbl_prescriptions" target="tbl_items">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

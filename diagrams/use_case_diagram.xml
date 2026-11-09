@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-11-08T22:00:00.000Z" agent="SCD Clinic System Generator" version="22.0.0" type="device">
+  <diagram id="use_case_diagram" name="Use Case Diagram - Clinic System">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <!-- System Boundary -->
+        <mxCell id="sys_box" value="Clinic Appointment &amp; Patient Records System" style="shape=rect;html=1;whiteSpace=wrap;fillColor=#f8fafc;strokeColor=#0284c7;strokeWidth=2;verticalAlign=top;fontStyle=1;fontSize=15;align=center;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="240" y="40" width="560" height="740" as="geometry" />
+        </mxCell>
+
+        <!-- Actors -->
+        <mxCell id="act_patient" value="Patient" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#e0f2fe;strokeColor=#0284c7;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="160" width="50" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="act_doctor" value="Doctor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#dcfce7;strokeColor=#16a34a;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="420" width="50" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="act_admin" value="System Administrator" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#fee2e2;strokeColor=#dc2626;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="870" y="280" width="50" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Use Cases -->
+        <mxCell id="uc_register" value="UC1: Register Patient Profile" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#0284c7;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="80" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_login" value="UC2: Authenticate &amp; Login&#xa;&lt;&lt;Includes RBAC Check&gt;&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#0284c7;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="420" y="170" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_book_apt" value="UC3: Search &amp; Book Appointment Slot" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#0284c7;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="260" width="220" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_check_conflict" value="UC4: Verify Slot Conflicts&#xa;&lt;&lt;extend&gt;&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="260" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_view_history" value="UC5: View Medical Records &amp; History" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#0284c7;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="340" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_manage_schedule" value="UC6: Manage Availability &amp; Shifts" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#16a34a;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="290" y="440" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_write_rx" value="UC7: Record Diagnostic &amp; Prescribe" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#16a34a;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="290" y="520" width="210" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_manage_docs" value="UC8: Credential Doctors &amp; Depts" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#dc2626;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="390" width="210" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_reports" value="UC9: View Operational Reports" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#dc2626;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="480" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_legacy_salvage" value="UC10: Salvage &amp; Import Legacy Files" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#dc2626;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="530" y="560" width="220" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_audit" value="UC11: Audit Security Logs" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#dc2626;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="640" width="200" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Edges -->
+        <mxCell id="e_pat_reg" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" edge="1" parent="1" source="act_patient" target="uc_register">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_pat_log" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" edge="1" parent="1" source="act_patient" target="uc_login">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_pat_book" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" edge="1" parent="1" source="act_patient" target="uc_book_apt">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_pat_hist" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" edge="1" parent="1" source="act_patient" target="uc_view_history">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_doc_log" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" edge="1" parent="1" source="act_doctor" target="uc_login">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_doc_sch" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" edge="1" parent="1" source="act_doctor" target="uc_manage_schedule">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_doc_rx" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" edge="1" parent="1" source="act_doctor" target="uc_write_rx">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_doc_hist" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" edge="1" parent="1" source="act_doctor" target="uc_view_history">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_adm_log" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" edge="1" parent="1" source="act_admin" target="uc_login">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_adm_doc" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" edge="1" parent="1" source="act_admin" target="uc_manage_docs">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_adm_rep" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" edge="1" parent="1" source="act_admin" target="uc_reports">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_adm_leg" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" edge="1" parent="1" source="act_admin" target="uc_legacy_salvage">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_adm_aud" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" edge="1" parent="1" source="act_admin" target="uc_audit">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ext_conflict" value="&lt;&lt;extend&gt;&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;dashed=1;rounded=0;" edge="1" parent="1" source="uc_check_conflict" target="uc_book_apt">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

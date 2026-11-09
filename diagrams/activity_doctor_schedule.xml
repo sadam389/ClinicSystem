@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-11-08T22:00:00.000Z" agent="SCD Clinic System Generator" version="22.0.0" type="device">
+  <diagram id="act_schedule" name="Activity Diagram - Doctor Schedule Management">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="800" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="start_s" value="" style="ellipse;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="435" y="40" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="a_login" value="Doctor logs in &amp; opens 'My Schedule'" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#16a34a;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="330" y="100" width="240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="a_fetch" value="System queries doctor_schedules by doctor_id" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#475569;" vertex="1" parent="1">
+          <mxGeometry x="320" y="170" width="260" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="a_render" value="Render weekly roster &amp; booked patient count" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#16a34a;" vertex="1" parent="1">
+          <mxGeometry x="330" y="240" width="240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="dec_action" value="Doctor requests&#xa;shift adjustment?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;" vertex="1" parent="1">
+          <mxGeometry x="370" y="310" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="a_notify_admin" value="Submit schedule modification request to Admin" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;" vertex="1" parent="1">
+          <mxGeometry x="100" y="420" width="260" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="a_view_patients" value="Proceed to view daily patient roster" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#16a34a;" vertex="1" parent="1">
+          <mxGeometry x="540" y="420" width="230" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="end_s" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="435" y="520" width="30" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Edges -->
+        <mxCell id="es1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="start_s" target="a_login"><mx:Geometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="es2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="a_login" target="a_fetch"><mx:Geometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="es3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="a_fetch" target="a_render"><mx:Geometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="es4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="a_render" target="dec_action"><mx:Geometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="es5_yes" value="[Yes]" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="dec_action" target="a_notify_admin"><mx:Geometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="es5_no" value="[No]" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="dec_action" target="a_view_patients"><mx:Geometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="es6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="a_notify_admin" target="end_s"><mx:Geometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="es7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="a_view_patients" target="end_s"><mx:Geometry relative="1" as="geometry" /></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

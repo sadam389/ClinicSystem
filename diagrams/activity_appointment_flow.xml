@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-11-08T22:00:00.000Z" agent="SCD Clinic System Generator" version="22.0.0" type="device">
+  <diagram id="act_appointment" name="Activity Diagram - Appointment Booking Flow">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Start Node -->
+        <mxCell id="start_node" value="" style="ellipse;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="435" y="40" width="30" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Activities -->
+        <mxCell id="act_browse" value="Patient selects Doctor &amp; Date" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="100" width="200" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="act_choose_slot" value="Select available 30-min time slot" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="170" width="200" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="act_input_reason" value="Input visit reason &amp; symptoms" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="240" width="200" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Decision: Validation -->
+        <mxCell id="dec_validate" value="Inputs Valid&#xa;&amp; Date in Future?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;" vertex="1" parent="1">
+          <mxGeometry x="370" y="310" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Decision: Conflict -->
+        <mxCell id="dec_conflict" value="Slot free in DB&#xa;without conflict?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;" vertex="1" parent="1">
+          <mxGeometry x="370" y="420" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="act_show_err" value="Display Validation Error Notice" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fee2e2;strokeColor=#dc2626;" vertex="1" parent="1">
+          <mxGeometry x="610" y="325" width="180" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="act_show_conflict" value="Prompt Alternate Slot Selection" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fee2e2;strokeColor=#dc2626;" vertex="1" parent="1">
+          <mxGeometry x="610" y="435" width="180" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="act_insert" value="Generate Unique Reference (APT-xxxx)&#xa;&amp; INSERT Appointment record" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#16a34a;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="530" width="220" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="act_audit" value="Write AUDIT_LOG entry" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#475569;" vertex="1" parent="1">
+          <mxGeometry x="360" y="610" width="180" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="act_notify" value="Render Confirmation on Patient Dashboard" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="330" y="680" width="240" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- End Node -->
+        <mxCell id="end_node" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="435" y="750" width="30" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Edges -->
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="start_node" target="act_browse"><mx:Geometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="act_browse" target="act_choose_slot"><mx:Geometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="act_choose_slot" target="act_input_reason"><mx:Geometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="act_input_reason" target="dec_validate"><mx:Geometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e5_yes" value="[Valid]" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="dec_validate" target="dec_conflict"><mx:Geometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e5_no" value="[Invalid]" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="dec_validate" target="act_show_err"><mx:Geometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_loop1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="act_show_err" target="act_input_reason"><mx:Geometry relative="1" as="geometry"><Array as="points"><mx:Point x="700" y="260" /></Array></mx:Geometry></mxCell>
+        <mxCell id="e6_yes" value="[Available]" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="dec_conflict" target="act_insert"><mx:Geometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e6_no" value="[Conflict]" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="dec_conflict" target="act_show_conflict"><mx:Geometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_loop2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="act_show_conflict" target="act_choose_slot"><mx:Geometry relative="1" as="geometry"><Array as="points"><mx:Point x="810" y="455" /><mx:Point x="810" y="190" /></Array></mx:Geometry></mxCell>
+        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="act_insert" target="act_audit"><mx:Geometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="act_audit" target="act_notify"><mx:Geometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="act_notify" target="end_node"><mx:Geometry relative="1" as="geometry" /></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

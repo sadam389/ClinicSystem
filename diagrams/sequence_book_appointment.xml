@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-11-08T22:00:00.000Z" agent="SCD Clinic System Generator" version="22.0.0" type="device">
+  <diagram id="seq_booking" name="Sequence Diagram - Appointment Booking">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="700" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="ll_pat" value="Patient Browser" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#e0f2fe;strokeColor=#0284c7;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="120" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_srv" value="BookAppointment&#xa;Servlet" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#f1f5f9;strokeColor=#475569;" vertex="1" parent="1">
+          <mxGeometry x="240" y="40" width="130" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_aserv" value="Appointment&#xa;Service" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#f1f5f9;strokeColor=#475569;" vertex="1" parent="1">
+          <mxGeometry x="440" y="40" width="130" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_adao" value="Appointment&#xa;Dao" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#f1f5f9;strokeColor=#475569;" vertex="1" parent="1">
+          <mxGeometry x="640" y="40" width="130" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_db" value="MySQL Database" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#dcfce7;strokeColor=#16a34a;" vertex="1" parent="1">
+          <mxGeometry x="840" y="40" width="120" height="560" as="geometry" />
+        </mxCell>
+
+        <!-- Interactions -->
+        <mxCell id="m1" value="1: POST /book-appointment (docId, date, time, reason)" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1" source="ll_pat" target="ll_srv">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><mx:Point x="100" y="110" as="sourcePoint" /><mx:Point x="300" y="110" as="targetPoint" /></mx:Geometry>
+        </mxCell>
+        <mxCell id="m2" value="2: bookAppointment(patId, docId, date, time, reason)" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1" source="ll_srv" target="ll_aserv">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><mx:Point x="305" y="140" as="sourcePoint" /><mx:Point x="505" y="140" as="targetPoint" /></mx:Geometry>
+        </mxCell>
+        <mxCell id="m3" value="3: ValidationUtil.isValidDate() &amp; checkNotInPast()" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1" source="ll_aserv" target="ll_aserv">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><Array as="points"><mx:Point x="530" y="170" /><mx:Point x="550" y="190" /><mx:Point x="510" y="200" /></Array></mx:Geometry>
+        </mxCell>
+        <mxCell id="m4" value="4: isSlotAvailable(docId, date, time)" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1" source="ll_aserv" target="ll_adao">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><mx:Point x="510" y="230" as="sourcePoint" /><mx:Point x="700" y="230" as="targetPoint" /></mx:Geometry>
+        </mxCell>
+        <mxCell id="m5" value="5: SELECT COUNT(*) FROM appointments ..." style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1" source="ll_adao" target="ll_db">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><mx:Point x="705" y="260" as="sourcePoint" /><mx:Point x="900" y="260" as="targetPoint" /></mx:Geometry>
+        </mxCell>
+        <mxCell id="m6" value="6: Return count = 0 (Slot Available)" style="html=1;verticalAlign=bottom;endArrow=dashed;rounded=0;" edge="1" parent="1" source="ll_db" target="ll_adao">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><mx:Point x="900" y="290" as="sourcePoint" /><mx:Point x="705" y="290" as="targetPoint" /></mx:Geometry>
+        </mxCell>
+        <mxCell id="m7" value="7: true" style="html=1;verticalAlign=bottom;endArrow=dashed;rounded=0;" edge="1" parent="1" source="ll_adao" target="ll_aserv">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><mx:Point x="700" y="320" as="sourcePoint" /><mx:Point x="510" y="320" as="targetPoint" /></mx:Geometry>
+        </mxCell>
+        <mxCell id="m8" value="8: create(Appointment object)" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1" source="ll_aserv" target="ll_adao">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><mx:Point x="510" y="360" as="sourcePoint" /><mx:Point x="700" y="360" as="targetPoint" /></mx:Geometry>
+        </mxCell>
+        <mxCell id="m9" value="9: INSERT INTO appointments ..." style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1" source="ll_adao" target="ll_db">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><mx:Point x="705" y="390" as="sourcePoint" /><mx:Point x="900" y="390" as="targetPoint" /></mx:Geometry>
+        </mxCell>
+        <mxCell id="m10" value="10: Generated Keys (appointment_id)" style="html=1;verticalAlign=bottom;endArrow=dashed;rounded=0;" edge="1" parent="1" source="ll_db" target="ll_adao">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><mx:Point x="900" y="420" as="sourcePoint" /><mx:Point x="705" y="420" as="targetPoint" /></mx:Geometry>
+        </mxCell>
+        <mxCell id="m11" value="11: Return aptId" style="html=1;verticalAlign=bottom;endArrow=dashed;rounded=0;" edge="1" parent="1" source="ll_adao" target="ll_aserv">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><mx:Point x="700" y="450" as="sourcePoint" /><mx:Point x="510" y="450" as="targetPoint" /></mx:Geometry>
+        </mxCell>
+        <mxCell id="m12" value="12: Return confirmed Appointment" style="html=1;verticalAlign=bottom;endArrow=dashed;rounded=0;" edge="1" parent="1" source="ll_aserv" target="ll_srv">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><mx:Point x="505" y="480" as="sourcePoint" /><mx:Point x="305" y="480" as="targetPoint" /></mx:Geometry>
+        </mxCell>
+        <mxCell id="m13" value="13: Redirect to /patient/dashboard?msg=Success" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="1" source="ll_srv" target="ll_pat">
+          <mxGeometry relative="1" as="geometry"><mx:Point as="offset" /><mx:Point x="300" y="520" as="sourcePoint" /><mx:Point x="100" y="520" as="targetPoint" /></mx:Geometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
